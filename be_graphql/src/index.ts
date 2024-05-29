@@ -4,10 +4,10 @@ import { ApolloServer } from 'apollo-server-express';
 import { schema } from './graphql';
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 import MongoLib from './mongo';
-
+ 
 const app: Application = express();
 app.use(cors());
-
+ 
 const server = new ApolloServer({
     schema,
     introspection: true,
@@ -16,11 +16,11 @@ const server = new ApolloServer({
     ],
     context: async () => new MongoLib().connect()
 });
-
+ 
 server.start().then(() => {
     server.applyMiddleware({ app: app as any });
-
+ 
     app.listen({ port: 4000 }, () => {
-        console.log(`🚀 Server ready at http://localhost:${4000}${server.graphqlPath}`);
+        console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
     });
 });
